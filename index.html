@@ -988,7 +988,8 @@ footer.site{border-top:1px solid var(--line);padding-block:22px;font-size:13px;c
 .in-name i{font-style:normal;display:inline-block}
 .in-sub{font:600 clamp(12px,1.5vw,18px) "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.5em;color:#0297DE;text-transform:uppercase;padding-left:.5em}
 .in-glint{position:absolute;top:0;bottom:0;width:22%;left:-30%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);mix-blend-mode:overlay}
-.in-ctrl{position:absolute;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));display:flex;gap:10px}
+.in-ctrl{position:absolute;z-index:5;right:max(18px,env(safe-area-inset-right));bottom:calc(9vh + 16px);display:flex;gap:10px}
+.in-ctrl #inSound{background:#FC734D;border-color:#FC734D;color:#02070A}
 .in-ctrl button{font:600 12px "IBM Plex Sans",system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:9px 16px;cursor:pointer}
 .in-ctrl button:hover{background:rgba(255,255,255,.18)}
 .in-ctrl button:focus-visible{outline:2px solid #0297DE;outline-offset:3px}
@@ -1006,7 +1007,7 @@ footer.site{border-top:1px solid var(--line);padding-block:22px;font-size:13px;c
     <div class="in-title" id="inTitle"><div class="in-block"><span class="in-name" id="inName"></span></div><div class="in-sub">Product Manager</div></div>
     <div class="in-flash" id="inFlash"></div>
   </div>
-  <div class="in-ctrl"><button type="button" id="inSound">Sound on</button><button type="button" id="inSkip">Skip intro ›</button></div>
+  <div class="in-ctrl"><button type="button" id="inSound">▶ Play with sound</button><button type="button" id="inSkip">Skip intro ›</button></div>
 </div>
 <script>(function(){var s=false;try{s=sessionStorage.getItem("mw-intro")==="1"}catch(e){}
 if(s||matchMedia("(prefers-reduced-motion: reduce)").matches){document.getElementById("intro").hidden=true}
@@ -1593,7 +1594,7 @@ if(s||matchMedia("(prefers-reduced-motion: reduce)").matches){document.getElemen
     </div>
   </section>
 
-  <footer class="site"><span>Manan Wason · Product Manager · <a href="https://www.linkedin.com/in/mananwason/" target="_blank" rel="noopener">LinkedIn</a></span><span><button class="replay-intro" type="button" onclick="window.replayIntro &amp;&amp; replayIntro()">Replay intro</button> · Bengaluru, India</span></footer>
+  <footer class="site"><span>Manan Wason · Product Manager · <a href="https://www.linkedin.com/in/mananwason/" target="_blank" rel="noopener">LinkedIn</a></span><span><button class="replay-intro" type="button" onclick="window.replayIntro &amp;&amp; replayIntro(true)">Replay intro with sound</button> · Bengaluru, India</span></footer>
 </div>
 
 <button class="totop" id="totop" type="button" aria-label="Back to top">↑</button>
@@ -2167,7 +2168,8 @@ document.addEventListener("click", function(e){
   });
   intro.addEventListener("click", finish);
   addEventListener("keydown", e => { if (e.key === "Escape" && !intro.hidden) finish(); });
-  window.replayIntro = () => { scrollTo(0,0); play(soundOn); };
+  const enableSound = () => { try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); ac.resume(); soundOn = true; } catch(err){} };
+  window.replayIntro = (withSound) => { if (withSound) enableSound(); scrollTo(0,0); play(soundOn); };
   if (!seen && !reduce) {
     const ready = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
     Promise.race([ready, new Promise(r => setTimeout(r, 1200))]).then(() => play(false));   // wait briefly for the headline font
