@@ -998,6 +998,78 @@ footer.site{border-top:1px solid var(--line);padding-block:22px;font-size:13px;c
 .replay-intro{all:unset;cursor:pointer;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
 @media (max-width:640px){.in-stage{width:92vw}.in-name{font-size:15vw}}
 </style>
+<style id="mobile-ux">
+/* ---------- responsive & mobile layer ---------- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.menu-btn{display:none}
+@media (max-width:860px){
+  .top{flex-wrap:nowrap;padding-block:10px;gap:10px}
+  .top .who{font-size:16px;min-width:0;white-space:nowrap}
+  .top .who .avatar{width:34px;height:34px}
+  .topbar .navr{display:flex!important;align-items:center;gap:8px;margin-left:auto;flex-wrap:nowrap}
+  .topbar .navcv{display:none}
+  .topbar .navcta{margin-left:0;padding:9px 12px}
+  .mode{padding:3px}
+  .menu-btn{display:inline-grid;place-items:center;width:42px;height:42px;flex:none;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);cursor:pointer;padding:0}
+  .menu-btn span,.menu-btn span::before,.menu-btn span::after{content:"";display:block;width:18px;height:2px;border-radius:2px;background:currentColor;position:relative;transition:transform .25s,opacity .2s}
+  .menu-btn span::before{position:absolute;top:-6px}
+  .menu-btn span::after{position:absolute;top:6px}
+  .topbar.menu-open .menu-btn span{background:transparent}
+  .topbar.menu-open .menu-btn span::before{transform:translateY(6px) rotate(45deg)}
+  .topbar.menu-open .menu-btn span::after{transform:translateY(-6px) rotate(-45deg)}
+  .pg-root[data-page="home"] .topbar:not(.scrolled):not(.menu-open) .menu-btn{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.55);color:#fff}
+  /* nav becomes a drop-down sheet */
+  .topbar .top nav{display:none!important}
+  .topbar.menu-open{background:var(--surface)!important}
+  .topbar.menu-open .top .who{color:var(--ink)!important}
+  .topbar.menu-open .navcta{background:var(--ink)!important;color:var(--bg)!important}
+  .topbar.menu-open .top nav{display:flex!important;flex-direction:column;position:absolute;left:0;right:0;top:100%;
+    background:var(--surface);border-bottom:1px solid var(--line);box-shadow:0 24px 40px -24px rgba(2,7,10,.45);
+    padding:6px 20px 18px;max-height:calc(100dvh - 70px);overflow-y:auto;animation:mnav .22s ease}
+  .topbar.menu-open .top nav a{font-size:15px!important;padding:15px 2px!important;color:var(--ink)!important;
+    border-bottom:1px solid var(--line);border-radius:0;display:flex;justify-content:space-between;align-items:center;text-decoration:none!important}
+  .topbar.menu-open .top nav a::before,.topbar.menu-open .top nav a::after{content:none}
+  .topbar.menu-open .top nav a.active{color:var(--accent)!important;font-weight:700}
+  .topbar.menu-open .top nav a.m-cv{border-bottom:0;margin-top:14px;justify-content:center;gap:8px;border-radius:8px;background:var(--mark,#FC734D);color:#02070A!important;font-weight:700}
+  @keyframes mnav{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+}
+@media (min-width:861px){.top nav a.m-cv{display:none}}
+@media (max-width:400px){.top .who{font-size:14px}.topbar .navcta{padding:9px 10px;font-size:11.5px}}
+@media (max-width:350px){.top .who .wname{display:none}}
+
+/* bigger tap targets on touch screens */
+@media (pointer:coarse){
+  .award .go,.vz a .v,.vz span.v,.sl-role,.jump2,footer.site a,.case .more a{display:inline-flex;align-items:center;min-height:40px}
+  .btn{min-height:44px}
+  .car-nav button,.car-btn{min-width:44px;min-height:44px}
+}
+
+@media (max-width:600px){
+  section{scroll-margin-top:72px}
+  /* contact: tidy two-column grid */
+  #contact .contact{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  #contact .contact .btn{justify-content:center;width:100%;box-sizing:border-box;padding-inline:10px;font-size:13px}
+  #contact .contact #emailText{grid-column:1 / -1;overflow-wrap:anywhere}
+  #contact .contact .toast{grid-column:1 / -1}
+  /* tables scroll sideways instead of squashing */
+  .tbl{-webkit-overflow-scrolling:touch;margin-inline:-4px;padding-inline:4px}
+  .tbl table{min-width:500px}
+  .tbl th,.tbl td{white-space:nowrap}
+  .tbl{-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
+  .tbl.at-end{-webkit-mask-image:none;mask-image:none}
+  /* bookshelf: show that it scrolls */
+  .shelf-wrap{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent);scroll-snap-type:x proximity}
+  .shelf-wrap.at-end{-webkit-mask-image:none;mask-image:none}
+  .book{scroll-snap-align:start}
+  /* explore cards a touch tighter */
+  .explore{gap:10px}
+  .ex-card{padding:15px 42px 15px 16px}
+  h2{overflow-wrap:break-word}
+}
+.rot-keep{white-space:nowrap}
+/* cinematic intro: taller card on phones so caption and number never collide */
+@media (max-width:640px){.in-stage{aspect-ratio:1/1!important;width:88vw!important}.pnl .cap{bottom:6%;font-size:11px}}
+</style>
 </head>
 <body>
 <script>window.PAGEMAP={"shipped":"shipped","experience":"experience","glance":"skills","recognition":"recognition","work":"case-studies","education":"education"};</script>
@@ -1607,7 +1679,7 @@ if(s||matchMedia("(prefers-reduced-motion: reduce)").matches){document.getElemen
       <button class="btn" id="copyEmail2" type="button">Copy email</button>
       <a class="btn ghost cv-btn" href="Manan_Wason_CV.pdf" download="Manan_Wason_CV.pdf"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Download CV</a>
       <a class="btn ghost" href="https://www.linkedin.com/in/mananwason/" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <span class="btn ghost email">+91 988 420 4645</span>
+      <a class="btn ghost email" href="tel:+919884204645">+91 988 420 4645</a>
       <span class="toast" id="toast" aria-live="polite"></span>
     </div>
   </section>
@@ -2192,6 +2264,35 @@ document.addEventListener("click", function(e){
     const ready = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
     Promise.race([ready, new Promise(r => setTimeout(r, 1200))]).then(() => play(false));   // wait briefly for the headline font
   } else intro.hidden = true;
+})();
+</script>
+<script id="mobile-ux-js">
+(function(){
+  var bar=document.querySelector('.topbar'), navr=bar&&bar.querySelector('.navr'), nav=bar&&bar.querySelector('nav');
+  if(bar&&navr&&nav&&!bar.querySelector('.menu-btn')){
+    var who=bar.querySelector('.who');
+    if(who){ for(var i=0;i<who.childNodes.length;i++){var n=who.childNodes[i]; if(n.nodeType===3&&n.textContent.trim()){var s=document.createElement('span');s.className='wname';s.textContent=n.textContent;who.replaceChild(s,n);break;}} }
+    var cv=document.createElement('a');cv.className='m-cv cv-btn';cv.href='Manan_Wason_CV.pdf';cv.setAttribute('download','Manan_Wason_CV.pdf');cv.setAttribute('data-placement','mobile_menu');cv.textContent='Download CV ↓';nav.appendChild(cv);
+    var b=document.createElement('button');b.type='button';b.className='menu-btn';b.setAttribute('aria-label','Open menu');b.setAttribute('aria-expanded','false');b.innerHTML='<span></span>';
+    navr.appendChild(b);
+    var set=function(o){bar.classList.toggle('menu-open',o);b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');};
+    b.addEventListener('click',function(e){e.stopPropagation();set(!bar.classList.contains('menu-open'));});
+    nav.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
+    document.addEventListener('click',function(e){if(!bar.contains(e.target))set(false);});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+    matchMedia('(min-width:861px)').addEventListener('change',function(m){if(m.matches)set(false);});
+  }
+  /* keep the rotating word and its full stop together */
+  var r=document.getElementById('rot');
+  if(r&&r.nextSibling&&r.nextSibling.nodeType===3&&/^[.,]/.test(r.nextSibling.textContent)&&!r.parentNode.classList.contains('rot-keep')){
+    var t=r.nextSibling, w=document.createElement('span');w.className='rot-keep';
+    r.parentNode.insertBefore(w,r);w.appendChild(r);w.appendChild(document.createTextNode(t.textContent[0]));t.textContent=t.textContent.slice(1);
+  }
+  /* bookshelf fade goes away at the end */
+  document.querySelectorAll('.shelf-wrap,.tbl').forEach(function(w){
+    var f=function(){w.classList.toggle('at-end',w.scrollLeft+w.clientWidth>=w.scrollWidth-4);};
+    w.addEventListener('scroll',f,{passive:true});addEventListener('resize',f);f();
+  });
 })();
 </script>
 </body>
